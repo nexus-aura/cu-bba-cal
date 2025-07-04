@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <title>Grade Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+  * { margin: 0; padding: 0; box-sizing:border-box; }
+html{ scroll-behavior:smooth;}
+html,body{ height:100%; }
+table, th, td { border: 0.5px solid black; }
+
+</style>
+<body>
+<header>
+   <img src="https://www.kindpng.com/picc/m/578-5783768_university-of-chittagong-logo-university-of-chittagong-hd.png" height="40px"> 
+  <div class="name"> C-GPA <a class="fade"> calculator </a></div>
+</header>
+
+<main> 
+  <div class="guide">
+    <h3> How to use GPA/CGPA calculator?</h3>
+    <a class="para"> To use GPA/CGPA calcualtor enter the values in empty filed grade must not exceed the max grade point guided by the university </a>
+  </div>
+
+  <h3 align="center" style="margin-top: 10px; opacity:0.9; text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 4px; text-decoration-color: #f1a3b1; color: #495057;
+
+"> GPA calculator</h3>
+
+  <div class="gpa_calculator">
+
+     <div class="graph"> 
+        
+  <canvas id="gradeChart"> </canvas>
+
+     </div> 
+
+     <div class="table-in"> 
+  <table cellspacing="0" id="gradeTable">
+    <thead>
+      <tr>
+        <th>Subject<br>Name</th>
+        <th>Credit</th>
+        <th>Earned<br>Grade</th>
+        <th>Earned<br>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+   
+      <tr>
+        <td contenteditable="true" oninput="limitSubjectLength(this)" maxlength="16" spellcheck="false"></td>
+        <td class="low-opacity">3</td>
+        <td contenteditable="true" spellcheck="false"></td>
+        <td class="low-opacity"></td>
+      </tr>
+      <tr>
+        <td contenteditable="true" oninput="limitSubjectLength(this)" maxlength="16" spellcheck="false"></td>
+        <td class="low-opacity">3</td>
+        <td contenteditable="true" spellcheck="false"></td>
+        <td class="low-opacity"></td>
+      </tr>
+      <tr>
+        <td contenteditable="true" oninput="limitSubjectLength(this)" maxlength="16" spellcheck="false"></td>
+        <td class="low-opacity">3</td>
+        <td contenteditable="true" spellcheck="false"></td>
+        <td class="low-opacity"></td>
+      </tr>
+      <tr>
+        <td contenteditable="true" oninput="limitSubjectLength(this)" maxlength="16" spellcheck="false"></td>
+        <td class="low-opacity">3</td>
+        <td contenteditable="true" spellcheck="false"></td>
+        <td class="low-opacity"></td>
+      </tr>
+      <tr>
+        <td contenteditable="true" oninput="limitSubjectLength(this)" maxlength="16" spellcheck="false"></td>
+        <td class="low-opacity">3</td>
+        <td contenteditable="true" spellcheck="false"></td>
+        <td class="low-opacity"></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>GPA =</b></td>
+        <td id="finalGPA" style="font-weight: 700;" ></td> 
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  
+   </div>
+   <div class="buttons1"> 
+  <button onclick="calculateGPA()">Calculate</button>
+  <button onclick="resetTable()">Reset</button>
+  </div>
+
+  <h3 align="center" style="margin-top: 10px; opacity:0.9; text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 4px; text-decoration-color: #f1a3b1; color: #495057;
+
+"> CGPA calculator</h3>
+  
+  <div class="gpa_calculator" style="background-color: ; margin-top: 10px;">
+    
+      <div id="graph" class="graph">
+    <canvas id="gpaChart"></canvas>
+  </div>
+   <div class="table-in"> 
+     <table id="cgpaTable" cellspacing="0">
+    <tr>
+      <th>Semester</th>
+      <th >Credit</th>
+      <th>Earned GPA</th>
+      <th >Earned Points</th>
+    </tr>
+    <tr><td class="low-opacity">Sem 1</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 2</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 3</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 4</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 5</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 6</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 7</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Sem 8</td><td class="low-opacity">15</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td class="low-opacity">Internship</td><td class="low-opacity">3</td><td contenteditable="true" oninput="handleGPA(this)"></td><td class="low-opacity earned"></td></tr>
+    <tr><td colspan="3"><b>CGPA</b></td><td id="finalCGPA"></td></tr>
+  </table>
+  </div>
+
+  </div>
+<div class="buttons1">
+    <button onclick="calculateCGPA()">Calculate</button>
+    <button onclick="resetTable()">Reset</button>
+  </div>
+</main>
+
+
+
+
+<footer>
+  <div class="creator">
+      <a style="color: white; font-size: 12px;"> Department of <br>  <b style="font-size: 13px;""> banking and insurance <br>  University of Chittagong </b> </a> 
+  </div>
+  <div class="creator2">
+   
+     <a style="color: white; font-size: 12px;"> Developed by <br> <b style="font-size: 14px;"> Amran khan </b> </a> 
+     <div style="font-size: 12px; color: white;">  bach 12 <span style="color: white; font-size: 11px;">&#10084;</span>
+     </div>
+
+  </div>
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
